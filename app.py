@@ -205,7 +205,7 @@ if page == "📊 Executive Dashboard":
             plot_bgcolor="#12151f", paper_bgcolor="#12151f",
             font_color="#9ca3af", height=280, margin=dict(t=10,b=10)
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True, key="chart_1")
 
     with col2:
         st.markdown('<div class="section-header">Wellbeing vs Conflict Risk</div>', unsafe_allow_html=True)
@@ -221,7 +221,7 @@ if page == "📊 Executive Dashboard":
             plot_bgcolor="#12151f", paper_bgcolor="#12151f",
             font_color="#9ca3af", height=280, margin=dict(t=10,b=10)
         )
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, use_container_width=True, key="chart_2")
 
     col3, col4 = st.columns(2)
 
@@ -244,7 +244,7 @@ if page == "📊 Executive Dashboard":
             plot_bgcolor="#12151f", paper_bgcolor="#12151f",
             font_color="#9ca3af", height=280, margin=dict(t=10,b=10)
         )
-        st.plotly_chart(fig3, use_container_width=True)
+        st.plotly_chart(fig3, use_container_width=True, key="chart_3")
 
     with col4:
         st.markdown('<div class="section-header">Avg Wellbeing by Job Role</div>', unsafe_allow_html=True)
@@ -260,7 +260,7 @@ if page == "📊 Executive Dashboard":
             font_color="#9ca3af", height=280, margin=dict(t=10,b=10),
             coloraxis_showscale=False
         )
-        st.plotly_chart(fig4, use_container_width=True)
+        st.plotly_chart(fig4, use_container_width=True, key="chart_4")
 
     # Top at-risk employees
     st.markdown("---")
@@ -340,7 +340,7 @@ elif page == "👥 Employee Explorer":
                 height=260, margin=dict(t=20,b=20,l=20,r=20),
                 showlegend=False
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True, key="chart_5")
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -488,7 +488,7 @@ elif page == "📈 Model Insights":
             coloraxis_showscale=False,
             title_font_color="#e8e8f0"
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True, key="chart_6")
 
     with tab1:
         feat_importance_chart(retention_model, "Top Features — Retention Risk Model")
@@ -509,7 +509,7 @@ elif page == "📈 Model Insights":
                 title="Actual Attrition Rate by Department")
             fig.update_layout(plot_bgcolor="#12151f", paper_bgcolor="#12151f",
                 font_color="#9ca3af", coloraxis_showscale=False)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True, key="chart_7")
 
     with tab2:
         feat_importance_chart(conflict_model, "Top Features — Conflict Risk Model")
@@ -530,7 +530,7 @@ elif page == "📈 Model Insights":
                 title="Avg Conflict Risk by Job Role")
             fig.update_layout(plot_bgcolor="#12151f", paper_bgcolor="#12151f",
                 font_color="#9ca3af", coloraxis_showscale=False)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True, key="chart_8")
 
     with tab3:
         feat_importance_chart(wellbeing_model, "Top Features — Wellbeing Score Model")
@@ -542,7 +542,7 @@ elif page == "📈 Model Insights":
         )
         fig.update_layout(plot_bgcolor="#12151f", paper_bgcolor="#12151f",
             font_color="#9ca3af")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True, key="chart_9")
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -570,7 +570,7 @@ elif page == "🌍 Multicultural Analysis":
             title="Risk by Education Level")
         fig.update_layout(plot_bgcolor="#12151f", paper_bgcolor="#12151f",
             font_color="#9ca3af")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True, key="chart_10")
 
     with col2:
         gen_risk = filtered_df.groupby("Gender").agg(
@@ -582,7 +582,7 @@ elif page == "🌍 Multicultural Analysis":
             barmode="group", title="Risk & Wellbeing by Gender",
             color_discrete_sequence=["#ff5f6d","#f0c040","#3dd68c"])
         fig2.update_layout(plot_bgcolor="#12151f", paper_bgcolor="#12151f", font_color="#9ca3af")
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, use_container_width=True, key="chart_11")
 
     col3, col4 = st.columns(2)
 
@@ -596,7 +596,7 @@ elif page == "🌍 Multicultural Analysis":
             barmode="group", title="Risk by Marital Status",
             color_discrete_sequence=["#ff5f6d","#f0c040","#3dd68c"])
         fig3.update_layout(plot_bgcolor="#12151f", paper_bgcolor="#12151f", font_color="#9ca3af")
-        st.plotly_chart(fig3, use_container_width=True)
+        st.plotly_chart(fig3, use_container_width=True, key="chart_12")
 
     with col4:
         travel_risk = filtered_df.groupby("BusinessTravel").agg(
@@ -610,7 +610,7 @@ elif page == "🌍 Multicultural Analysis":
         fig4.update_traces(textposition="top center")
         fig4.update_layout(plot_bgcolor="#12151f", paper_bgcolor="#12151f",
             font_color="#9ca3af", coloraxis_showscale=False)
-        st.plotly_chart(fig4, use_container_width=True)
+        st.plotly_chart(fig4, use_container_width=True, key="chart_13")
 
     st.markdown("---")
     st.markdown("### 🔬 Insights for Multicultural Scientific Organisations")
