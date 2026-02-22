@@ -15,6 +15,30 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# ── Auto-generate data & models if missing (for Streamlit Cloud) ────────────
+import subprocess, sys
+
+def auto_setup():
+    needs_setup = (
+        not os.path.exists("models/retention_model.pkl") or
+        not os.path.exists("data/hr_dataset.csv")
+    )
+    if needs_setup:
+        os.makedirs("data",   exist_ok=True)
+        os.makedirs("models", exist_ok=True)
+        with st.spinner("⚙️ First-time setup: generating dataset & training models (1–2 mins)…"):
+            result = subprocess.run(
+                [sys.executable, "generate_data_and_train.py"],
+                capture_output=True, text=True
+            )
+        if result.returncode != 0:
+            st.error(f"Setup failed:\n{result.stderr}")
+            st.stop()
+        st.success("✅ Setup complete! Loading dashboard…")
+        st.rerun()
+
+auto_setup()
+
 # ── Custom CSS ──────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
