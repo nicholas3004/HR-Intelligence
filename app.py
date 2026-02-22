@@ -340,7 +340,7 @@ elif page == "👥 Employee Explorer":
                 height=260, margin=dict(t=20,b=20,l=20,r=20),
                 showlegend=False
             )
-            st.plotly_chart(fig, use_container_width=True, key="chart_5")
+            st.plotly_chart(fig, use_container_width=True, key=f"radar_{int(row['EmployeeID'])}")
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -438,9 +438,9 @@ elif page == "🔮 Risk Predictor":
             return fig
 
         g1,g2,g3 = st.columns(3)
-        g1.plotly_chart(gauge(ret*100,  "Retention Risk",  "#ff5f6d"), use_container_width=True)
-        g2.plotly_chart(gauge(conf*100, "Conflict Risk",   "#f0c040"), use_container_width=True)
-        g3.plotly_chart(gauge(well,     "Wellbeing Score", "#3dd68c"), use_container_width=True)
+        g1.plotly_chart(gauge(ret*100,  "Retention Risk",  "#ff5f6d"), use_container_width=True, key="gauge_ret")
+        g2.plotly_chart(gauge(conf*100, "Conflict Risk",   "#f0c040"), use_container_width=True, key="gauge_conf")
+        g3.plotly_chart(gauge(well,     "Wellbeing Score", "#3dd68c"), use_container_width=True, key="gauge_well")
 
         # Recommendations
         st.markdown("### 💡 HR Recommendations")
@@ -488,7 +488,7 @@ elif page == "📈 Model Insights":
             coloraxis_showscale=False,
             title_font_color="#e8e8f0"
         )
-        st.plotly_chart(fig, use_container_width=True, key="chart_6")
+        st.plotly_chart(fig, use_container_width=True, key=f"feat_imp_{title[:15].replace(' ','_').replace('—','')}")
 
     with tab1:
         feat_importance_chart(retention_model, "Top Features — Retention Risk Model")
