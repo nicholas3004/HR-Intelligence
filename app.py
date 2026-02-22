@@ -467,7 +467,7 @@ elif page == "📈 Model Insights":
 
     tab1, tab2, tab3 = st.tabs(["🚪 Retention Model", "⚡ Conflict Model", "🧠 Wellbeing Model"])
 
-    def feat_importance_chart(model, title):
+    def feat_importance_chart(model, title, chart_key="feat_imp"):
         if hasattr(model, "feature_importances_"):
             imp = pd.Series(model.feature_importances_, index=feature_cols).sort_values(ascending=True).tail(15)
         elif hasattr(model, "coef_"):
@@ -488,10 +488,10 @@ elif page == "📈 Model Insights":
             coloraxis_showscale=False,
             title_font_color="#e8e8f0"
         )
-        st.plotly_chart(fig, use_container_width=True, key=f"feat_imp_{title[:15].replace(' ','_').replace('—','')}")
+        st.plotly_chart(fig, use_container_width=True, key=chart_key)
 
     with tab1:
-        feat_importance_chart(retention_model, "Top Features — Retention Risk Model")
+        feat_importance_chart(retention_model, "Top Features — Retention Risk Model", chart_key="feat_retention")
         col1, col2 = st.columns(2)
         with col1:
             st.markdown("**Key Drivers of Attrition Risk**")
@@ -512,7 +512,7 @@ elif page == "📈 Model Insights":
             st.plotly_chart(fig, use_container_width=True, key="chart_7")
 
     with tab2:
-        feat_importance_chart(conflict_model, "Top Features — Conflict Risk Model")
+        feat_importance_chart(conflict_model, "Top Features — Conflict Risk Model", chart_key="feat_conflict")
         col1, col2 = st.columns(2)
         with col1:
             st.markdown("**Key Drivers of Conflict Risk**")
@@ -533,7 +533,7 @@ elif page == "📈 Model Insights":
             st.plotly_chart(fig, use_container_width=True, key="chart_8")
 
     with tab3:
-        feat_importance_chart(wellbeing_model, "Top Features — Wellbeing Score Model")
+        feat_importance_chart(wellbeing_model, "Top Features — Wellbeing Score Model", chart_key="feat_wellbeing")
         fig = px.scatter(
             filtered_df.sample(min(300, len(filtered_df))),
             x="WellbeingScore", y="RetentionRisk",
